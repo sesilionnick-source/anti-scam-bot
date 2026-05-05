@@ -1,4 +1,5 @@
 from telegram import Update
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 from telegram.ext import MessageHandler, filters
 from web3 import Web3
@@ -106,13 +107,17 @@ def format_security_report(result: dict) -> str:
 
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    _ = context
-    message = (
-        "Привет. Я анализирую токены и выдаю понятный отчёт по рискам.\n\n"
-        "Просто отправь адрес токена в формате `0x...`, и я запущу проверку.\n"
-        f"Сеть по умолчанию: {DEFAULT_NETWORK}."
+    keyboard = [[
+        InlineKeyboardButton(
+            "🛡 Open Token Risk Checker",
+            web_app=WebAppInfo(url="https://anti-scam-g7zhk3yy4-nicks-projects-24d5052b.vercel.app")
+        )
+    ]]
+    reply_markup = InlineKeyboardMarkup(keyboard)
+    await update.message.reply_text(
+        "👋 Welcome to Token Risk Checker!\n\nSend any BSC or ETH token address to analyze it for honeypot risks.\n\nOr open the Mini App for a visual interface:",
+        reply_markup=reply_markup
     )
-    await update.message.reply_text(message, parse_mode="Markdown")
 
 
 async def handle_token_address(
