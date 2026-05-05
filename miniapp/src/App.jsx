@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
  
-const API_BASE = 'http://localhost:8000'
+const API_BASE = 'https://anti-scam-bot-izwq.onrender.com'
  
 function truncateAddress(addr) {
   if (!addr || addr.length < 12) return addr
