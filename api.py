@@ -45,3 +45,17 @@ async def health():
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run("api:app", host="0.0.0.0", port=8000, reload=True)
+
+import threading
+
+def run_bot():
+    import asyncio
+    from bot import main as bot_main
+    asyncio.run(bot_main())
+
+if __name__ == "__main__":
+    bot_thread = threading.Thread(target=run_bot, daemon=True)
+    bot_thread.start()
+    import uvicorn
+    uvicorn.run("api:app", host="0.0.0.0", port=10000)
+    

@@ -7,7 +7,8 @@ from web3 import Web3
 from checker import analyze_token
 
 
-BOT_TOKEN = "8541598294:AAGYc17FoDgIWDfDhDMVjFHY8l0Gjg1PRkE"
+import os
+BOT_TOKEN = os.environ.get("BOT_TOKEN")
 DEFAULT_NETWORK = "bsc"
 
 
