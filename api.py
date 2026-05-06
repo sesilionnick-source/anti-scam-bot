@@ -42,6 +42,17 @@ async def health():
     return {"status": "ok"}
 
 
+import threading
+import asyncio
+
+def run_bot():
+    from bot import main as bot_main
+    asyncio.run(bot_main())
+
+bot_thread = threading.Thread(target=run_bot, daemon=True)
+bot_thread.start()
+
+
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run("api:app", host="0.0.0.0", port=8000, reload=True)
